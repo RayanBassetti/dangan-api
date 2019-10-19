@@ -8,8 +8,13 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+    const character = {
+        name: req.body.name,
+        gameId: req.body.gameId
+    };
     res.status(201).json({
-        message: 'Character posted'
+        message: 'Character posted',
+        createdCharacter: character
     });
 });
 

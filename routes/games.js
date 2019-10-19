@@ -8,8 +8,13 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+    const game = {
+        name: req.body.name,
+        year: req.body.year
+    }
     res.status(201).json({
-        message: 'Game posted'
+        message: 'Game posted',
+        createdGame: game
     });
 });
 
