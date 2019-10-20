@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const character = {
         name: req.body.name,
-        gameId: req.body.gameId
+        opusId: req.body.opusId
     };
     res.status(201).json({
         message: 'Character posted',
@@ -39,7 +39,7 @@ router.patch('/:characterId', (req, res, next) => {
     })
 })
 
-router.delete('/:gameId', (req, res, next) => {
+router.delete('/:characterId', (req, res, next) => {
     res.status(200).json({
         message: 'Deleted character'
     })
