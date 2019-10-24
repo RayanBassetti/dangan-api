@@ -9,4 +9,4 @@ const opusSchema = mongoose.Schema({ // initiate a schema
     }
 });
 
-module.exports = mongoose.model('Opus', opusSchema); // takes 2 parameters : the name of the obhect, and the schema it's based on
+module.exports = mongoose.model('Opus', opusSchema); // takes 2 parameters : the name of the object, and the schema it's based on

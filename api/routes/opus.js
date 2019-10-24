@@ -29,10 +29,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+    var {name, year} = req.body;
     const opus = new Opus({
         _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        year: req.body.year
+        name: name,
+        year: year
     });
     opus
         .save() // store in the database
