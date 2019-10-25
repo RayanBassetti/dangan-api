@@ -43,29 +43,56 @@ router.post('/', (req, res, next) => {
 
 router.get('/:characterId', (req, res, next) => {
     const id = req.params.characterId;
-    if(id === "1") {
+    Character.findById(id)
+             .exec()
+             .then(result => {
+                 res.status(200).json(result)
+             })
+             .catch(err => {
+                 res.status(500).json({
+                     error: err
+                 })
+             });
+    if(id === "999") {
         res.status(200).json({
             name: 'Hinata Hajime',
-            id: id
-        })
-    } else {
-        res.status(200).json({
-            message: 'Passed an id',
             id: id
         })
     }
 })
 
 router.patch('/:characterId', (req, res, next) => {
-    res.status(200).json({
-        message: 'Updated character'
-    })
+    const id = req.params.characterId;
+    const body = req.body;
+    const updateOps = {};
+    for (const ops in body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    Character.update({_id: id}, { $set: updateOps })
+        .exec()
+        .then(res => 
+            res.status(201).json({
+                message: 'Patched opus with id: ' + id
+            })
+        )
+        .catch(err => 
+            res.status(500).json(
+                {error: err})
+        );
 })
 
 router.delete('/:characterId', (req, res, next) => {
-    res.status(200).json({
-        message: 'Deleted character'
-    })
+    const id = req.params.characterId;
+    Character.remove({_id: id})
+        .exec()
+        .then(result => {
+            res.status(200).json(result)
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })
 })
 
 module.exports = router;

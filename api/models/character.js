@@ -6,7 +6,8 @@ const characterSchema = mongoose.Schema({ // initiate a schema
     age: Number,
     birth_date: String,
     status: String,
-    appears_in: String
+    appears_in: String,
+    talent: String
 });
 
 module.exports = mongoose.model('Character', characterSchema); // takes 2 parameters : the name of the object, and the schema it's based on
