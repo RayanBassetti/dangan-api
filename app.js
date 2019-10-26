@@ -6,6 +6,7 @@ const mongoose = require('mongoose'); // library to connect to MongoDb
 //importing the routes
 const opusRouter = require('./api/routes/opus');
 const charactersRouter = require('./api/routes/characters');
+const userRouter = require('./api/routes/user');
 
 // connecting to the mongodb
 mongoose.connect('mongodb+srv://RBPerso:'+ process.env.MONGO_ATLAS_PW + '@dangan-api-cluster-jxfb0.mongodb.net/test?retryWrites=true&w=majority',
@@ -28,8 +29,9 @@ app.use((req, res, next) => {
 })
 
 // importing routes 
-app.use('/characters', charactersRouter) 
+app.use('/characters', charactersRouter);
 app.use('/opus', opusRouter);
+app.use('/user', userRouter);
 
 // //middleware to handle errors
 // app.use((req, res, next) => {

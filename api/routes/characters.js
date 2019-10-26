@@ -65,7 +65,7 @@ router.patch('/:characterId', (req, res, next) => {
                 error: err
             })
         } 
-        res.status(201).json({
+        res.status(200).json({
             message: 'Character updated, id: ' + id,
             updated_character: result
         })
