@@ -72,14 +72,18 @@ router.get('/:opusId', (req, res, next) => {
 
 router.patch('/:opusId', (req, res, next) => {
     const id = req.params.opusId;
-    const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
-    Opus.update({_id: id}, { $set: updateOps })
-        .exec()
-        .then(res => res.status(201).json({message: 'Patched opus with id: ' + id}))
-        .catch(err => res.status(500).json({error: err}));
+    const opus = req.body;
+    Opus.findByIdAndUpdate(id, opus, function(err, result) {
+        if(err) {
+            res.status(500).json({
+                err: err
+            })
+        }
+        res.status(201).json({
+            message: 'Opus updated, id: ' + id,
+            updated_opus: result
+        })
+    })
 })
 
 router.delete('/:opusId', (req, res, next) => {

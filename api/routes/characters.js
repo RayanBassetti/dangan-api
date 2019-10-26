@@ -58,21 +58,21 @@ router.get('/:characterId', (req, res, next) => {
 
 router.patch('/:characterId', (req, res, next) => {
     const id = req.params.characterId;
-    const body = req.body;
-    // console.log(body);
-    Character.updateOne({_id: id}, { $set: body })
-             .exec()
-             .then(res => 
-                res.status(201).json({
-                    message: 'Patched opus with id: ' + id
-                })
-             )
-             .catch(err => 
-                res.status(500).json(
-                    {mi: err})
-             );
-})
+    const character = req.body;
+    Character.findByIdAndUpdate(id, character, function(err, result) {
+        if(err) {
+            res.status(500).json({
+                error: err
+            })
+        } 
+        res.status(201).json({
+            message: 'Character updated, id: ' + id,
+            updated_character: result
+        })
+    })
 
+})
+            
 router.delete('/:characterId', (req, res, next) => {
     const id = req.params.characterId;
     Character.remove({_id: id})
